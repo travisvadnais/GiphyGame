@@ -1,10 +1,30 @@
 $(document).ready(function () {
 
+    //This is a magic script I found on StackOverflow to disable the 'Submit' button when the user presses 'Enter' b/c it was causing the page to reload.  It also turns the 'Enter' keystroke into a 'Submit' button click event to run all the functionality down below.
+    $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+        //Checks to see if the button was 'Enter'
+        if(e.which == 13) {
+            //If so, it prevents the default action, which was to reload the page
+            e.preventDefault();
+            //Then it clicks the 'Submit' button, as that was what the user intended
+            $("#submit").click();
+            return false;
+        }
+    });
+
     //array to hold the initial list of bands
-    var topics = ["Tampa Bay Buccaneers", "Seattle Seahawks", "Philadelphia Eagles", "Green Bay Packers"];
+    var topics = ["Tampa Bay Buccaneers", "Boston Red Sox", "LA Rams", "Baltimore Ravens", "Pittsburgh Steelers", "Denver Broncos", "Jacksonville Jaguars", "Miami Dolphins", "New England Patriots", "Seattle Seahawks", "Philadelphia Eagles", "Green Bay Packers", "New York Giants", "Washington Redskins"];
+
+    //Alphabetize the array
+    topics = topics.sort();
+
+    //Run the function to generate all the buttons
     setupBoard();
 
     function setupBoard() {
+
+        //Make sure the new user input is added alphabetically
+        topic = topics.sort();
     
         //Loop through each array element
         for (var i = 0; i < topics.length; i++) {
@@ -101,34 +121,45 @@ $(document).ready(function () {
         //empty the search field
         $("#user_input").val("");
 
-        //We're going to run some validation on the user input:
-        for (var i = 0; i < topics.length; i++) {
-            
-            //Check to make sure it's not a duplicate
-            if (newTeam == topics[i]) {
-                alert("Pick a NEW Team!");
-            }
-            //Check to make sure it's not some nonsense like a space
-            else if (newTeam.length < 4) {
-                alert("Please choose a real team!");
-                break;
-            }
-            //If it passes, push to the array and re-run the setup function
-            else {
-                //push the new team into the array of teams
-                topics.push(newTeam);
-                //Clear out all the existing buttons
-                $(".button_div").empty();
-                setupBoard();
-                break;
-            }
+        //Now we need to run some validation.  First, create two a new uppercase array and convert team name to uppercase for comparison
+        var convertedTopics = [];
+        var convertedNewTeam = newTeam.toUpperCase();
+
+        //Run a loop to convert all array elements to uppercase and push to the new array
+        for (var j = 0; j < topics.length; j++) {
+            convertedTopics[j] = topics[j].toUpperCase();
+            convertedTopics.push(convertedTopics[j]);
+        }
+
+        //if the new team matches anything in the array or it's too short, we'll stop this function
+        if ((convertedTopics.indexOf(convertedNewTeam) != -1) || (newTeam.length < 4)) {
+            return;
+        }            
+
+        // If both tests pass
+        else {    
+            //we're going to format the input and push that value to the topics array
+            topics.push(formatInput(newTeam));
+            //Clear out all the existing buttons
+            $(".button_div").empty();
+            //Run the setup function again
+            setupBoard();
+            //End the loop
+            return;
+        }
+
+        //This function formats the user's input and capitalizes the first letter of each word
+        function formatInput(team) {
+            return team.replace(/\w\S*/g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
         }
     });
 
 
     //TO-DO LIST
-    // 1. Fix Input Check Loop b/c it's still adding a button even if it fails the duplicate check
-    // 2. Disable 'Enter' key on the form b/c it's causing the page to reload
+    // 1. Fix Input Check Loop b/c it's still adding a button even if it fails the duplicate check - DONE
+    // 2. Disable 'Enter' key on the form b/c it's causing the page to reload - DONE
     // 3. Try to make the Giphy pulls random instead of always pulling the same 10
     // 4. Add Media Query for mobile so GIFs take up 100% of the div - DONE
     // 5. Add rating beneath the GIF - DONE

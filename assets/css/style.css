@@ -1,5 +1,9 @@
 body {
     background: url("../images/background.jpg");
+    min-height: 1000px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 
 }
 
@@ -68,7 +72,7 @@ img {
     margin: 10px 10px 10px 0;
     border: 2px solid white;
     border-radius: 25%;
-
+    max-height: 200px;
 }
 
 span {
