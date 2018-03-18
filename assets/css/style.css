@@ -8,17 +8,103 @@ button {
     margin-top: 10px;
 }
 
+.btn-danger {
+    border: 1px solid white;
+}
+
+/* BEGIN SUBMIT FORM STYLING */
+.search_bar {
+    margin-top: 10px;
+    border: 2px solid darkred;
+    border-radius: 25px;
+    background: lightpink;
+    max-height: 250px;
+}
+
+form {
+    padding: 10px;
+}
+
+#submit, #user_input {
+    border: 2px solid darkred;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#submit {
+    font-weight: 700;
+}
+
+#submit:hover {
+    cursor: pointer;
+}
+/* END SUBMIT FORM STYLING */
+
 .giphy_container {
     margin-top: 20px;
 }
 
-img {
-    margin-top: 10px;
+div.giphy_div {
+    display: inline-block;
 }
 
-.search_bar {
-    margin-top: 10px;
-    border: 2px solid red;
-    background: grey;
-    max-height: 150px;
+.giphy_div {
+    display: flex;
+    width: 30%;
+    margin-right: 3%;
 }
+
+.giphy_div div {
+    flex: 1;
+}
+
+.giphy_div img {
+    width: 100%;
+    transition: width 1s, height 1s;
+    margin-left: 12%;
+}
+
+img {
+    margin: 10px 10px 10px 0;
+    border: 2px solid white;
+    border-radius: 25%;
+
+}
+
+span {
+    margin-left: 30%;
+    color: white;
+    font-weight: 700;
+    font-size: 1em;
+    text-align: center;
+}
+
+@media only screen and (max-width: 520px) {
+
+    .giphy_div {
+        width: 45%;
+    }
+
+    .giphy_div img {
+        margin: 10px 10px 10px 0;
+    }
+
+}
+
+@media only screen and (max-width: 420px) {
+    
+    .btn-danger {
+        width: 100%;
+    }
+    
+    .giphy_div {
+        width: 100%;
+    }
+    
+    .giphy_div img {
+        margin: 10px 0 10px 0;
+    }
+}
+
+
+

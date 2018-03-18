@@ -45,17 +45,17 @@ $(document).ready(function () {
                     for (var i = 0; i < results.length; i++) {
                         
                         //Variables to hold div & image tags
-                        var giphyDiv = $("<div>");
+                        var giphyDiv = $("<div class='giphy_div'>");
                         var teamImg = $("<img>");
                         
                         //Variable to hold paragraph text
-                        var p = $("<p>").text("Rating: " + results[i].rating).attr("display", "inline");
+                        var imgLabel = $("<span class='label'>").text("Rating: " + results[i].rating.toUpperCase());
 
                         //add the image source attr to the image tag
-                        teamImg.attr("src", results[i].images.fixed_width_still.url);
+                        teamImg.attr("src", results[i].images.downsized_still.url);
                         teamImg.addClass("teamImage");
-                        teamImg.attr("img-freeze", results[i].images.fixed_width_still.url);
-                        teamImg.attr("img-active", results[i].images.fixed_width.url);
+                        teamImg.attr("img-freeze", results[i].images.downsized_still.url);
+                        teamImg.attr("img-active", results[i].images.downsized.url);
                         
                         //This is essentially a flag.  We're starting on 'still' but can toggle to active
                         teamImg.attr("current-state", "still");
@@ -64,7 +64,7 @@ $(document).ready(function () {
                         giphyDiv.append(teamImg);
                         
                         //append the paragraph content to the new div
-                        giphyDiv.append(p);
+                        giphyDiv.append(imgLabel);
                         
                         //adds the gif to the top of the giphy_container div
                         $(".giphy_holder").prepend(giphyDiv);
@@ -101,16 +101,37 @@ $(document).ready(function () {
         //empty the search field
         $("#user_input").val("");
 
-        //push the new team into the array of teams
-        topics.push(newTeam);
-
-        //Clear out all the existing buttons
-        $(".button_div").empty();
-
-        //Run the setupBoard function again to populate the new button
-        setupBoard();
+        //We're going to run some validation on the user input:
+        for (var i = 0; i < topics.length; i++) {
+            
+            //Check to make sure it's not a duplicate
+            if (newTeam == topics[i]) {
+                alert("Pick a NEW Team!");
+            }
+            //Check to make sure it's not some nonsense like a space
+            else if (newTeam.length < 4) {
+                alert("Please choose a real team!");
+                break;
+            }
+            //If it passes, push to the array and re-run the setup function
+            else {
+                //push the new team into the array of teams
+                topics.push(newTeam);
+                //Clear out all the existing buttons
+                $(".button_div").empty();
+                setupBoard();
+                break;
+            }
+        }
     });
 
+
+    //TO-DO LIST
+    // 1. Fix Input Check Loop b/c it's still adding a button even if it fails the duplicate check
+    // 2. Disable 'Enter' key on the form b/c it's causing the page to reload
+    // 3. Try to make the Giphy pulls random instead of always pulling the same 10
+    // 4. Add Media Query for mobile so GIFs take up 100% of the div - DONE
+    // 5. Add rating beneath the GIF - DONE
 
 
 
