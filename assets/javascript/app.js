@@ -13,7 +13,7 @@ $(document).ready(function () {
     });
 
     //array to hold the initial list of bands
-    var topics = ["Tampa Bay Buccaneers", "Boston Red Sox", "LA Rams", "Baltimore Ravens", "Pittsburgh Steelers", "Denver Broncos", "Jacksonville Jaguars", "Miami Dolphins", "New England Patriots", "Seattle Seahawks", "Philadelphia Eagles", "Green Bay Packers", "New York Giants", "Washington Redskins"];
+    var topics = ["Tampa Bay Buccaneers", "Baltimore Ravens", "Denver Broncos", "Jacksonville Jaguars", "Miami Dolphins", "New England Patriots", "Seattle Seahawks", "Philadelphia Eagles", "Green Bay Packers"];
 
     //Alphabetize the array
     topics = topics.sort();

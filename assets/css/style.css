@@ -29,14 +29,20 @@ form {
     padding: 10px;
 }
 
+input[type=text]:focus {
+    background-color: lightgrey;
+}
+
 #submit, #user_input {
     border: 2px solid darkred;
     margin-top: 10px;
     width: 100%;
+    border-radius: 4px;
 }
 
 #submit {
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
 #submit:hover {
