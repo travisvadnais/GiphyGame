@@ -13,7 +13,7 @@ $(document).ready(function () {
     });
 
     //array to hold the initial list of bands
-    var topics = ["Tampa Bay Buccaneers", "Baltimore Ravens", "Denver Broncos", "Jacksonville Jaguars", "Miami Dolphins", "New England Patriots", "Seattle Seahawks", "Philadelphia Eagles", "Green Bay Packers"];
+    var topics = ["Tampa Bay Buccaneers", "New York Giants", "New York Jets", "Washington Redskins", "Baltimore Ravens", "Denver Broncos", "Jacksonville Jaguars", "Miami Dolphins", "New England Patriots", "Seattle Seahawks", "Philadelphia Eagles", "Green Bay Packers"];
 
     //Alphabetize the array
     topics = topics.sort();
@@ -42,7 +42,7 @@ $(document).ready(function () {
             var apiKey = "&api_key=7p715sLTbzL1CUqM6yIB6qMKLQ0dWXx6"
 
             //Variable to hold the # of results
-            var limit = "&limit=10"
+            var limit = "&limit=9"
 
             //Set up a variable to hold the entire query URL
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + team + apiKey + limit;
