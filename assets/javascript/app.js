@@ -5,7 +5,6 @@ $(document).ready(() => {
     if(e.which == 13) {  //Checks to see if the button was 'Enter'
       e.preventDefault();  //If so, it prevents the default action, which was to reload the page
       $("#submit").click();  //Then it clicks the 'Submit' button, as that was what the user intended
-      return false;
     }
   }));
 
@@ -75,20 +74,14 @@ $(document).ready(() => {
     let convertedNewTeam = newTeam.toUpperCase();
     let convertedTopics = topics.map((_val, j) => topics[j].toUpperCase());
 
-    //if the new team matches anything in the array or it's too short, we'll stop this function
-    if ((convertedTopics.indexOf(convertedNewTeam) != -1) || (newTeam.length < 4)) {
-      return;
-    }            
-    // If both tests pass
-    else {    
+    //Push the new team if it's not already there and is at least 4 characters
+    if (!((convertedTopics.indexOf(convertedNewTeam)) > -1) && (!(newTeam.length < 4))) {
       //we're going to format the input and push that value to the topics array
       topics.push(formatInput(newTeam));
       //Clear out all the existing buttons
       $(".button_div").empty();
       setupBoard();
-      //End the loop
-      return;
-    }
+    }            
 
     //This function formats the user's input and capitalizes the first letter of each word
     function formatInput(team) {
